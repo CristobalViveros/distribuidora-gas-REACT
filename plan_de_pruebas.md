@@ -14,7 +14,7 @@ Pruebas unitarias y de integración de componentes con Vitest, React Testing Lib
 | PU-008 | RutaPrivada | Abrir `/admin` sin sesión. | Resolver navegación. | Redirige a login y no muestra panel. |
 | PU-009 | Registro | Completar datos válidos. | Crear cuenta. | Abre perfil y no persiste contraseña en localStorage. |
 | PU-010 | Registro | Completar contraseñas distintas. | Enviar formulario. | Muestra validación de coincidencia. |
-| PU-011 | Admin | Completar nombre y descripción. | Agregar producto. | Aparece en catálogo con imagen genérica. |
+| PU-011 | Admin | Completar nombre, precio positivo y descripción. | Agregar producto. | Aparece en catálogo con imagen genérica y precio ingresado. |
 | PU-012 | Admin | Seleccionar producto existente. | Cambiar nombre y guardar. | El catálogo refleja el nuevo nombre. |
 | PU-013 | Admin | Seleccionar producto existente. | Eliminar producto. | Desaparece del catálogo. |
 | PU-014 | Carrito | Renderizar tarjeta y carrito. | Añadir un producto. | Se muestra una unidad y resumen de consulta. |
@@ -26,6 +26,15 @@ Pruebas unitarias y de integración de componentes con Vitest, React Testing Lib
 | PU-020 | DetalleProducto | Abrir detalle. | Disminuir desde una unidad. | La cantidad mínima permanece en uno. |
 | PU-021 | Perfil | Iniciar con sesión de cliente. | Actualizar comuna. | Confirma y guarda la comuna en metadatos de sesión. |
 | PU-022 | Home | Renderizar Inicio dentro del router. | Inspeccionar el elemento de video. | Tiene controles y usa `/video/VideoGas.mp4`. |
+| PU-023 | Registro | Completar los campos obligatorios. | Ingresar nombre vacío o de menos de cuatro letras. | Rechaza el nombre con mensaje específico. |
+| PU-024 | Registro | Completar el formulario. | Ingresar correo sin dominio `.cl` o `.com`. | Rechaza el correo. |
+| PU-025 | Registro | Completar el formulario. | Ingresar teléfono fuera de longitud o con dígitos repetidos. | Rechaza el teléfono con mensaje específico. |
+| PU-026 | Registro | Abrir el selector de comunas. | Revisar localidades disponibles. | Ofrece comunas cercanas a Chillán y excluye localidades lejanas. |
+| PU-027 | Registro | Completar el formulario. | Ingresar contraseña menor a ocho caracteres. | Rechaza la contraseña. |
+| PU-028 | Registro | Ingresar datos válidos. | Registrar teléfonos de 8 y 9 dígitos y correos `.cl`/`.com`. | Acepta los formatos solicitados. |
+| PU-029 | Productos | Renderizar el catálogo inicial. | Revisar precios de los ocho productos. | Cada artículo muestra el precio definido para él. |
+| PU-030 | Carrito | Agregar un producto con precio conocido. | Aumentar su cantidad. | Subtotal y total corresponden a precio por cantidad. |
+| PU-031 | Admin | Dejar el precio vacío. | Revisar validez del formulario. | Impide crear un producto sin precio. |
 
 ## Ejecución
 

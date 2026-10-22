@@ -486,13 +486,6 @@ body{
     margin-top: 14px;
 }
 
-.producto-consultar{
-    color: var(--azul-principal);
-    font-weight: 700;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
-}
-
 .btn-guardar{
     min-width: 92px;
     min-height: 40px;

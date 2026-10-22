@@ -37,7 +37,7 @@ El acceso está definido en el código del cliente solo para la evaluación. No 
 
 ## Estado de los datos
 
-El catálogo que agrega el administrador, las cuentas nuevas y el carrito son temporales y se reinician al recargar. `localStorage` conserva solo metadatos de sesión, sin contraseña. El formulario y el checkout muestran confirmaciones locales: no envían datos, no cobran y no calculan precios. El administrador y el cliente de esta demo no deben considerarse autenticación de producción.
+El catálogo que agrega el administrador, las cuentas nuevas y el carrito son temporales y se reinician al recargar. `localStorage` conserva solo metadatos de sesión, sin contraseña. Los precios del catálogo son estáticos y el panel solicita un precio positivo para cada producto nuevo. El formulario y el checkout muestran confirmaciones locales: no envían datos ni procesan pagos. El administrador y el cliente de esta demo no deben considerarse autenticación de producción.
 
 ## Estructura
 

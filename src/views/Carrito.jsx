@@ -2,11 +2,13 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import ControlCantidad from '../components/molecules/ControlCantidad.jsx'
 import { useTienda } from '../hooks/useTienda.js'
+import { formatearPrecio, obtenerPrecio } from '../utils/formatearPrecio.js'
 
 export default function Carrito() {
   const { carrito, cambiarCantidad, quitarDelCarrito } = useTienda()
   const [pedidoPreparado, setPedidoPreparado] = useState(false)
   const unidades = carrito.reduce((total, item) => total + item.cantidad, 0)
+  const total = carrito.reduce((suma, item) => suma + obtenerPrecio(item.producto) * item.cantidad, 0)
 
   return (
     <main id="contenido">
@@ -26,7 +28,8 @@ export default function Carrito() {
                   <div className="carrito-producto-info">
                     <h2>{producto.nombre}</h2>
                     <p>{producto.categoria}</p>
-                    <p>Precio a consultar</p>
+                    <p>Precio unitario: {formatearPrecio(obtenerPrecio(producto))}</p>
+                    <p>Subtotal: {formatearPrecio(obtenerPrecio(producto) * cantidad)}</p>
                   </div>
                   <ControlCantidad
                     cantidad={cantidad}
@@ -42,7 +45,7 @@ export default function Carrito() {
             <div className="resumen-carrito">
               <h2>Resumen del pedido</h2>
               <p>Unidades: {unidades}</p>
-              <p>Total: se confirma al consultar precios y disponibilidad.</p>
+              <p>Total: {formatearPrecio(total)}</p>
               <button className="btn" type="button" onClick={() => setPedidoPreparado(true)}>
                 Preparar solicitud de compra
               </button>

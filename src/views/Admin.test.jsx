@@ -3,6 +3,7 @@ import { expect, it } from 'vitest'
 import { MemoryRouter } from 'react-router-dom'
 import { TiendaProvider } from '../context/TiendaContext.jsx'
 import Admin from './Admin.jsx'
+import { formatearPrecio } from '../utils/formatearPrecio.js'
 
 function renderPanel() {
   return render(
@@ -17,12 +18,23 @@ function renderPanel() {
 it('crea un producto con imagen genérica por defecto', () => {
   renderPanel()
   fireEvent.change(screen.getByLabelText('Nombre del producto'), { target: { value: 'Manguera auxiliar' } })
+  fireEvent.change(screen.getByLabelText('Precio en pesos'), { target: { value: '3500' } })
   fireEvent.change(screen.getByLabelText('Descripción'), { target: { value: 'Accesorio para instalación.' } })
   fireEvent.click(screen.getByRole('button', { name: 'Agregar producto' }))
 
   expect(screen.getByRole('heading', { name: 'Manguera auxiliar' })).toBeInTheDocument()
   const fila = screen.getByRole('heading', { name: 'Manguera auxiliar' }).closest('article')
   expect(within(fila).getByRole('presentation').getAttribute('src')).toBe('/img/Logo.jpg')
+  expect(within(fila).getByText(formatearPrecio(3500))).toBeInTheDocument()
+})
+
+it('exige un precio para crear un producto', () => {
+  renderPanel()
+  const precio = screen.getByLabelText('Precio en pesos')
+
+  expect(precio).toBeRequired()
+  expect(precio).toHaveAttribute('min', '10')
+  expect(precio.checkValidity()).toBe(false)
 })
 
 it('actualiza un producto existente desde el panel', () => {

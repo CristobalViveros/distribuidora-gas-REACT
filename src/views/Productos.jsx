@@ -13,7 +13,7 @@ export default function Productos() {
             <p className="seccion-etiqueta">Cilindros, accesorios y más</p>
             <h1 id="titulo-productos">Nuestros productos</h1>
           </div>
-          <p>Explora lo que tenemos y consulta disponibilidad.</p>
+          <p>Explora nuestros productos y encuentra lo que buscas.</p>
         </div>
         <div className="galeria-productos">
           {productos.map((producto) => (
