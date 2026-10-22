@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import ControlCantidad from '../components/molecules/ControlCantidad.jsx'
 import NoEncontrado from './NoEncontrado.jsx'
 import { useTienda } from '../hooks/useTienda.js'
+import { formatearPrecio, obtenerPrecio } from '../utils/formatearPrecio.js'
 
 export default function DetalleProducto() {
   const { id } = useParams()
@@ -33,7 +34,7 @@ export default function DetalleProducto() {
             <p className="seccion-etiqueta">{producto.categoria}</p>
             <h1 id="titulo-detalle">{producto.nombre}</h1>
             <p>{producto.descripcion}</p>
-            <p className="precio-consulta">Precio: consultar disponibilidad</p>
+            <p className="producto-precio">{formatearPrecio(obtenerPrecio(producto))}</p>
             <ControlCantidad cantidad={cantidad} alCambiar={cambiarCantidad} />
             <button className="btn boton-agregar-carrito" type="button" onClick={agregar}>
               Agregar al carrito

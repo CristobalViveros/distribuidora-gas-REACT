@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import FormularioProducto from '../components/organisms/FormularioProducto.jsx'
 import { useTienda } from '../hooks/useTienda.js'
+import { formatearPrecio, obtenerPrecio } from '../utils/formatearPrecio.js'
 
 export default function Admin() {
   const { productos, agregarProducto, actualizarProducto, eliminarProducto } = useTienda()
@@ -39,6 +40,7 @@ export default function Admin() {
               <div>
                 <h3><Link to={`/producto/${producto.id}`}>{producto.nombre}</Link></h3>
                 <p>{producto.categoria}</p>
+                <p>{formatearPrecio(obtenerPrecio(producto))}</p>
               </div>
               <div className="acciones-admin">
                 <button className="btn-admin" type="button" onClick={() => setProductoEditando(producto)}>

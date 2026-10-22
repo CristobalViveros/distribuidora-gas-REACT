@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useTienda } from '../../hooks/useTienda.js'
+import { formatearPrecio, obtenerPrecio } from '../../utils/formatearPrecio.js'
 
 export default function TarjetaProducto({ producto }) {
   const [guardado, setGuardado] = useState(false)
@@ -12,10 +13,8 @@ export default function TarjetaProducto({ producto }) {
       <p className="producto-etiqueta">{producto.categoria}</p>
       <h3><Link className="enlace-producto" to={`/producto/${producto.id}`}>{producto.nombre}</Link></h3>
       <p className="producto-desc">{producto.descripcion}</p>
+      <p className="producto-precio">{formatearPrecio(obtenerPrecio(producto))}</p>
       <div className="producto-acciones">
-        <Link className="producto-consultar" to={`/contacto?producto=${producto.id}`}>
-          Consultar
-        </Link>
         <button className="btn-agregar" type="button" onClick={() => agregarAlCarrito(producto)}>
           Añadir
         </button>

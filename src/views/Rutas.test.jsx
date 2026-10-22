@@ -7,6 +7,7 @@ import RutaPrivada from '../components/RutaPrivada.jsx'
 import DetalleProducto from './DetalleProducto.jsx'
 import NoEncontrado from './NoEncontrado.jsx'
 import Perfil from './Perfil.jsx'
+import { formatearPrecio } from '../utils/formatearPrecio.js'
 
 beforeEach(() => window.localStorage.clear())
 
@@ -30,6 +31,7 @@ it('muestra el detalle y actualiza el contador al agregar al carrito', () => {
   fireEvent.click(screen.getByRole('button', { name: 'Agregar al carrito' }))
 
   expect(screen.getByRole('heading', { name: 'Cilindro 11 kg' })).toBeInTheDocument()
+  expect(screen.getByText(formatearPrecio(15990))).toBeInTheDocument()
   expect(screen.getByRole('link', { name: 'Carrito (2)' })).toBeInTheDocument()
   expect(screen.getByText('Agregado al carrito.')).toBeInTheDocument()
 })

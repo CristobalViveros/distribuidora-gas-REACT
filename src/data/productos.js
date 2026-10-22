@@ -3,6 +3,7 @@ export const productos = [
     id: 'cilindro-5',
     categoria: 'Cilindro de gas',
     kilos: 5,
+    precio: 9990,
     nombre: 'Cilindro 5 kg',
     descripcion: 'Formato liviano para consumos puntuales y espacios reducidos.',
     imagen: '/img/cilindro5kg.jpg',
@@ -12,6 +13,7 @@ export const productos = [
     id: 'cilindro-11',
     categoria: 'Cilindro de gas',
     kilos: 11,
+    precio: 15990,
     nombre: 'Cilindro 11 kg',
     descripcion: 'Una alternativa práctica para las necesidades cotidianas del hogar.',
     imagen: '/img/cilindro11kg.jpg',
@@ -21,6 +23,7 @@ export const productos = [
     id: 'cilindro-15',
     categoria: 'Cilindro de gas',
     kilos: 15,
+    precio: 19990,
     nombre: 'Cilindro 15 kg',
     descripcion: 'Más capacidad para acompañar el uso frecuente en casa.',
     imagen: '/img/cilindro15kg.jpg',
@@ -30,6 +33,7 @@ export const productos = [
     id: 'cilindro-45',
     categoria: 'Cilindro de gas',
     kilos: 45,
+    precio: 55990,
     nombre: 'Cilindro 45 kg',
     descripcion: 'Formato de mayor capacidad para hogares y pequeños negocios.',
     imagen: '/img/cilindro45kg.jpg',
@@ -38,6 +42,7 @@ export const productos = [
   {
     id: 'regulador',
     categoria: 'Accesorio',
+    precio: 5590,
     nombre: 'Regulador de gas',
     descripcion: 'Regulador profesional para gas licuado.',
     imagen: '/img/ReguladorGas.jpg',
@@ -46,6 +51,7 @@ export const productos = [
   {
     id: 'llavero',
     categoria: 'Promocional',
+    precio: 2990,
     nombre: 'Llavero El Volcán',
     descripcion: 'Llavero con el emblema de Distribuidora El Volcán.',
     imagen: '/img/llavero.jpg',
@@ -54,6 +60,7 @@ export const productos = [
   {
     id: 'calendario',
     categoria: 'Promocional',
+    precio: 1990,
     nombre: 'Calendario de pared 2027',
     descripcion: 'Calendario corporativo de pared con identidad El Volcán.',
     imagen: '/img/calendario.jpg',
@@ -62,6 +69,7 @@ export const productos = [
   {
     id: 'peluche',
     categoria: 'Promocional',
+    precio: 6990,
     nombre: 'Peluche El Volcán',
     descripcion: 'Peluche de la mascota de Distribuidora El Volcán.',
     imagen: '/img/peluche.jpg',

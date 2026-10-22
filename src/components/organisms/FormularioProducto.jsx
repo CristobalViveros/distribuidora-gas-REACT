@@ -11,6 +11,7 @@ export default function FormularioProducto({ producto, alGuardar, alCancelar }) 
       id: producto?.id ?? `producto-${Date.now()}`,
       categoria: datos.get('categoria'),
       nombre: datos.get('nombre'),
+      precio: Number(datos.get('precio') || 0),
       descripcion: datos.get('descripcion'),
       imagen: producto?.imagen ?? '/img/Logo.jpg',
       alt: producto?.alt ?? `Imagen genérica de ${datos.get('nombre')}`,
@@ -26,6 +27,7 @@ export default function FormularioProducto({ producto, alGuardar, alCancelar }) 
         <option>Promocional</option>
         <option>Cilindro de gas</option>
       </CampoFormulario>
+      <CampoFormulario id="producto-precio" name="precio" label="Precio en pesos" type="number" min="10" step="10" defaultValue={producto?.precio ?? ''} required />
       <CampoFormulario id="producto-descripcion" name="descripcion" label="Descripción" as="textarea" rows={3} defaultValue={producto?.descripcion ?? ''} required />
       <p className="aviso-demo">Se asignará automáticamente una imagen genérica. El catálogo se mantiene en memoria mientras la página esté abierta.</p>
       <div className="acciones-formulario">
