@@ -710,6 +710,11 @@ body{
     font-weight: 700;
 }
 
+#pie .pie-legal{
+    font-size: 0.85rem;
+    font-weight: 400;
+}
+
 #pie a{
     color: var(--blanco);
     font-size: 0.9rem;
