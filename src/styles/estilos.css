@@ -14,21 +14,27 @@
 }
 
 .grupo-form {
-    margin-bottom: 1.5rem
+    margin-bottom: 1.25rem;
 }          
 
 .grupo-form label {
     display: block;
     margin-bottom: 0.5rem;
-    font-weight: bold;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: rgb(27, 27, 27);
 }
 
-.grupo-form input {
+.grupo-form input,
+.grupo-form select,
+.grupo-form textarea {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
+    padding: 10px 12px;
+    border: 1px solid #f28a8a;
     border-radius: 4px;
-    box-sizing: border-box; /* Evita que el padding rompa el ancho */
+    box-sizing: border-box;
+    background-color: rgb(255, 250, 250);
+    color: rgb(30, 30, 30);
 }
 
 /*----------------------*/
@@ -56,10 +62,11 @@
 /* ==== Mensajes de validación ==== */
 .mensaje-error{
     display: block;
-    color: rgb(200, 40, 40);
-    font-size: 0.85rem;
-    margin-top: 4px;
-    min-height: 18px; /* reserva espacio para que el form no "salte" cuando aparece */
+    color: rgb(220, 55, 55);
+    font-size: 0.95rem;
+    margin-top: 0.45rem;
+    min-height: 20px;
+    line-height: 1.4;
 }
 
 .mensaje-exito{
@@ -685,6 +692,21 @@ body{
     font: inherit;
 }
 
+.grupo-form input[aria-invalid="true"],
+.grupo-form select[aria-invalid="true"],
+.grupo-form textarea[aria-invalid="true"] {
+    border-color: rgb(220, 55, 55);
+    background-color: rgb(255, 245, 245);
+}
+
+.grupo-form .mensaje-error {
+    color: rgb(220, 55, 55);
+    font-size: 0.95rem;
+    margin-top: 0.45rem;
+    min-height: 20px;
+    line-height: 1.4;
+}
+
 .grupo-form :focus-visible{
     outline: 3px solid rgba(240, 120, 30, 0.28);
     border-color: var(--naranja);
@@ -791,4 +813,127 @@ body{
 .btn-admin-eliminar:hover{
     background: rgb(160, 35, 35);
     color: var(--blanco);
+}
+
+/* ESTILOS ESPECÍFICOS PARA EL FORMULARIO DE CONTACTO */
+.grupo-form input,
+.grupo-form select,
+.grupo-form textarea {
+    border: 1px solid var(--borde-input);
+    border-radius: 4px;
+    background-color: var(--fondo-input);
+    color: inherit;
+    font: inherit;
+    padding: 10px;
+    width: 100%;
+    display: block;
+}
+
+.grupo-form input:invalid,
+.grupo-form select:invalid,
+.grupo-form textarea:invalid {
+    border-color: rgb(180, 45, 45);
+    background-color: rgb(255, 240, 240);
+}
+
+.grupo-form input:focus:invalid,
+.grupo-form select:focus:invalid,
+.grupo-form textarea:focus:invalid {
+    outline: 3px solid rgba(240, 120, 30, 0.28);
+    border-color: var(--naranja);
+}
+
+.mensaje-error {
+    display: block;
+    color: rgb(220, 55, 55);
+    font-size: 0.95rem;
+    margin-top: 0.45rem;
+    min-height: 20px; /* reserva espacio para que el form no "salte" cuando aparece */
+}
+
+.mensaje-exito {
+    text-align: center;
+    color: rgb(40, 140, 60);
+    font-weight: bold;
+    margin: 16px 0 0;
+}
+
+/* Estilo para el filtro de categoría */
+.filtros-productos{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 1.25rem 0 1rem;
+    flex-wrap: wrap;
+}
+
+.filtros-productos label{
+    font-weight: 700;
+    color: var(--azul-principal);
+}
+
+.selector-filtro{
+    min-width: 180px;
+    padding: 10px 12px;
+    border: 1px solid rgb(210, 210, 210);
+    border-radius: 6px;
+    background-color: var(--blanco);
+    color: rgb(40, 40, 40);
+}
+
+.mensaje-vacio{
+    margin-top: 1rem;
+    color: rgb(90, 90, 90);
+    font-weight: 600;
+}
+
+@media (max-width: 480px) {
+    .formulario-contenedor {
+        padding: 1.5rem;
+    }
+
+    .grupo-form label {
+        font-size: 0.9rem;
+    }
+
+    .grupo-form input,
+    .grupo-form select,
+    .grupo-form textarea {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+
+    .btn {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    #encabezado {
+        padding: 16px 12px;
+    }
+
+    .logo-contenedor {
+        gap: 8px;
+    }
+
+    #encabezado .logo {
+        height: 46px;
+    }
+
+    .marca-nombre {
+        font-size: 1.15rem;
+    }
+
+    #menu-principal ul {
+        gap: 10px 14px;
+    }
+
+    #menu-principal ul li a {
+        padding: 7px 10px;
+        font-size: 0.9rem;
+    }
+
+    .hero {
+        padding: 24px 20px;
+    }
 }

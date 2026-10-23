@@ -1,8 +1,7 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import FormularioProducto from '../components/organisms/FormularioProducto.jsx'
+import FilaAdmin from '../components/molecules/FilaAdmin.jsx'
 import { useTienda } from '../hooks/useTienda.js'
-import { formatearPrecio, obtenerPrecio } from '../utils/formatearPrecio.js'
 
 export default function Admin() {
   const { productos, agregarProducto, actualizarProducto, eliminarProducto } = useTienda()
@@ -35,22 +34,12 @@ export default function Admin() {
         <h2 id="titulo-inventario">Catálogo actual ({productos.length})</h2>
         <div className="lista-admin">
           {productos.map((producto) => (
-            <article className="fila-admin" key={producto.id}>
-              <img src={producto.imagen} alt="" />
-              <div>
-                <h3><Link to={`/producto/${producto.id}`}>{producto.nombre}</Link></h3>
-                <p>{producto.categoria}</p>
-                <p>{formatearPrecio(obtenerPrecio(producto))}</p>
-              </div>
-              <div className="acciones-admin">
-                <button className="btn-admin" type="button" onClick={() => setProductoEditando(producto)}>
-                  Editar
-                </button>
-                <button className="btn-admin btn-admin-eliminar" type="button" onClick={() => eliminarProducto(producto.id)}>
-                  Eliminar
-                </button>
-              </div>
-            </article>
+            <FilaAdmin
+              key={producto.id}
+              producto={producto}
+              onEditar={() => setProductoEditando(producto)}
+              onEliminar={() => eliminarProducto(producto.id)}
+            />
           ))}
         </div>
       </section>

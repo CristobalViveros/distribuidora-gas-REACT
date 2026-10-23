@@ -1,8 +1,6 @@
 import { useState } from 'react'
-import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
-import CampoFormulario from '../components/atoms/CampoFormulario.jsx'
+import { useLocation, useNavigate } from 'react-router-dom'
+import FormularioLogin from '../components/organisms/FormularioLogin.jsx'
 import { useTienda } from '../hooks/useTienda.js'
 
 export default function Login() {
@@ -28,34 +26,14 @@ export default function Login() {
     <main id="contenido">
       <section className="seccion" aria-labelledby="titulo-login">
         <h1 id="titulo-login">Iniciar sesión</h1>
-        <Form className="formulario-contenedor" onSubmit={manejarEnvio}>
-          <CampoFormulario
-            id="login-email"
-            label="Correo electrónico"
-            type="email"
-            autoComplete="email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            required
-          />
-          <CampoFormulario
-            id="login-password"
-            label="Contraseña"
-            type="password"
-            autoComplete="current-password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            required
-          />
-          {error && <p className="mensaje-error" role="alert">{error}</p>}
-          <Button className="btn" type="submit">Entrar</Button>
-          <p className="enlaces-form">
-            ¿Aún no tienes cuenta? <Link to="/registro">Regístrate</Link>
-          </p>
-          <p className="aviso-demo">
-            Acceso de demostración admin: admin@elvolcan.cl / volcan2026
-          </p>
-        </Form>
+        <FormularioLogin
+          email={email}
+          password={password}
+          error={error}
+          onChangeEmail={(event) => setEmail(event.target.value)}
+          onChangePassword={(event) => setPassword(event.target.value)}
+          onSubmit={manejarEnvio}
+        />
       </section>
     </main>
   )

@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import ControlCantidad from '../components/molecules/ControlCantidad.jsx'
+import FilaCarrito from '../components/molecules/FilaCarrito.jsx'
+import ResumenCarrito from '../components/molecules/ResumenCarrito.jsx'
 import { useTienda } from '../hooks/useTienda.js'
-import { formatearPrecio, obtenerPrecio } from '../utils/formatearPrecio.js'
+import { obtenerPrecio } from '../utils/formatearPrecio.js'
 
 export default function Carrito() {
   const { carrito, cambiarCantidad, quitarDelCarrito } = useTienda()
@@ -23,38 +24,21 @@ export default function Carrito() {
           <>
             <div className="lista-carrito">
               {carrito.map(({ producto, cantidad }) => (
-                <article className="fila-carrito" key={producto.id}>
-                  <img src={producto.imagen} alt="" />
-                  <div className="carrito-producto-info">
-                    <h2>{producto.nombre}</h2>
-                    <p>{producto.categoria}</p>
-                    <p>Precio unitario: {formatearPrecio(obtenerPrecio(producto))}</p>
-                    <p>Subtotal: {formatearPrecio(obtenerPrecio(producto) * cantidad)}</p>
-                  </div>
-                  <ControlCantidad
-                    cantidad={cantidad}
-                    alCambiar={(cambio) => cambiarCantidad(producto.id, cambio)}
-                    etiqueta={`Cantidad de ${producto.nombre}`}
-                  />
-                  <button className="btn-admin btn-admin-eliminar" type="button" onClick={() => quitarDelCarrito(producto.id)}>
-                    Quitar
-                  </button>
-                </article>
+                <FilaCarrito
+                  key={producto.id}
+                  producto={producto}
+                  cantidad={cantidad}
+                  onCambiarCantidad={(cambio) => cambiarCantidad(producto.id, cambio)}
+                  onQuitar={() => quitarDelCarrito(producto.id)}
+                />
               ))}
             </div>
-            <div className="resumen-carrito">
-              <h2>Resumen del pedido</h2>
-              <p>Unidades: {unidades}</p>
-              <p>Total: {formatearPrecio(total)}</p>
-              <button className="btn" type="button" onClick={() => setPedidoPreparado(true)}>
-                Preparar solicitud de compra
-              </button>
-              {pedidoPreparado && (
-                <p className="mensaje-exito" role="status">
-                  Solicitud preparada como demostración. No se procesó ningún pago.
-                </p>
-              )}
-            </div>
+            <ResumenCarrito
+              unidades={unidades}
+              total={total}
+              pedidoPreparado={pedidoPreparado}
+              onPreparar={() => setPedidoPreparado(true)}
+            />
           </>
         )}
       </section>
