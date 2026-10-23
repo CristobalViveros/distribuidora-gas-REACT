@@ -45,27 +45,40 @@ function completarRegistro(overrides = {}) {
 }
 
 it('inicia sesión de administrador con credenciales estáticas', async () => {
+  // Arrange
   renderRutas()
   fireEvent.change(screen.getByLabelText('Correo electrónico'), { target: { value: 'admin@elvolcan.cl' } })
   fireEvent.change(screen.getByLabelText('Contraseña'), { target: { value: 'volcan2026' } })
+
+  // Act
   fireEvent.click(screen.getByRole('button', { name: 'Entrar' }))
 
+  // Assert
   expect(await screen.findByRole('heading', { name: 'Panel protegido' })).toBeInTheDocument()
   expect(JSON.parse(window.localStorage.getItem('el-volcan-sesion'))).toMatchObject({ rol: 'admin' })
 })
 
 it('rechaza credenciales incorrectas', () => {
+  // Arrange
   renderRutas()
   fireEvent.change(screen.getByLabelText('Correo electrónico'), { target: { value: 'admin@elvolcan.cl' } })
   fireEvent.change(screen.getByLabelText('Contraseña'), { target: { value: 'incorrecta' } })
+
+  // Act
   fireEvent.click(screen.getByRole('button', { name: 'Entrar' }))
 
+  // Assert
   expect(screen.getByRole('alert')).toHaveTextContent('Correo o contraseña incorrectos.')
 })
 
 it('redirige visitantes sin sesión desde el panel a login', async () => {
+  // Arrange
   renderRutas('/admin')
 
+  // Act
+  // No action required; route change is triggered by protected route
+
+  // Assert
   expect(await screen.findByRole('heading', { name: 'Iniciar sesión' })).toBeInTheDocument()
   expect(screen.queryByRole('heading', { name: 'Panel protegido' })).not.toBeInTheDocument()
 })
@@ -73,36 +86,52 @@ it('redirige visitantes sin sesión desde el panel a login', async () => {
 it.each(['ana@ejemplo.cl', 'ana@ejemplo.com'])(
   'registra cliente con correo permitido %s sin guardar la contraseña',
   async (email) => {
-  renderRutas('/registro')
-  completarRegistro({ email })
-  fireEvent.click(screen.getByRole('button', { name: 'Crear cuenta' }))
+    // Arrange
+    renderRutas('/registro')
+    completarRegistro({ email })
 
-  expect(await screen.findByRole('heading', { name: 'Perfil de cliente' })).toBeInTheDocument()
-  expect(window.localStorage.getItem('el-volcan-sesion')).not.toContain('clave-segura')
+    // Act
+    fireEvent.click(screen.getByRole('button', { name: 'Crear cuenta' }))
+
+    // Assert
+    expect(await screen.findByRole('heading', { name: 'Perfil de cliente' })).toBeInTheDocument()
+    expect(window.localStorage.getItem('el-volcan-sesion')).not.toContain('clave-segura')
   },
 )
 
 it('valida que ambas contraseñas del registro coincidan', () => {
+  // Arrange
   renderRutas('/registro')
   completarRegistro({ confirmar: 'otra-clave' })
+
+  // Act
   fireEvent.submit(screen.getByRole('button', { name: 'Crear cuenta' }).closest('form'))
 
+  // Assert
   expect(screen.getByText('Las contraseñas no coinciden.')).toBeInTheDocument()
 })
 
 it.each(['', 'Ana'])('rechaza un nombre con menos de cuatro letras: "%s"', (nombre) => {
+  // Arrange
   renderRutas('/registro')
   completarRegistro({ nombre })
+
+  // Act
   fireEvent.submit(screen.getByRole('button', { name: 'Crear cuenta' }).closest('form'))
 
+  // Assert
   expect(screen.getByText('El nombre debe contener al menos 4 letras.')).toBeInTheDocument()
 })
 
 it.each(['ana@ejemplo.net', 'no-es-correo'])('rechaza correo no terminado en .cl o .com: "%s"', (email) => {
+  // Arrange
   renderRutas('/registro')
   completarRegistro({ email })
+
+  // Act
   fireEvent.submit(screen.getByRole('button', { name: 'Crear cuenta' }).closest('form'))
 
+  // Assert
   expect(screen.getByText('Ingresa un correo válido terminado en .cl o .com.')).toBeInTheDocument()
 })
 
@@ -111,26 +140,38 @@ it.each([
   ['11111111', 'El teléfono no puede tener todos sus números repetidos.'],
   ['888888888', 'El teléfono no puede tener todos sus números repetidos.'],
 ])('rechaza teléfono inválido %s', (telefono, mensaje) => {
+  // Arrange
   renderRutas('/registro')
   completarRegistro({ telefono })
+
+  // Act
   fireEvent.submit(screen.getByRole('button', { name: 'Crear cuenta' }).closest('form'))
 
+  // Assert
   expect(screen.getByText(mensaje)).toBeInTheDocument()
 })
 
 it.each(['98765432', '987654321'])('acepta teléfono de 8 o 9 números: %s', async (telefono) => {
+  // Arrange
   renderRutas('/registro')
   completarRegistro({ telefono })
+
+  // Act
   fireEvent.click(screen.getByRole('button', { name: 'Crear cuenta' }))
 
+  // Assert
   expect(await screen.findByRole('heading', { name: 'Perfil de cliente' })).toBeInTheDocument()
 })
 
 it('ofrece comunas cercanas a Chillán y excluye comunas lejanas', () => {
+  // Arrange
   renderRutas('/registro')
+
+  // Act
   const opciones = Array.from(screen.getByLabelText('Comuna de despacho').options)
     .map((opcion) => opcion.value)
 
+  // Assert
   expect(opciones).toContain('Chillán')
   expect(opciones).toContain('Chillán Viejo')
   expect(opciones).toContain('Bulnes')
@@ -138,9 +179,13 @@ it('ofrece comunas cercanas a Chillán y excluye comunas lejanas', () => {
 })
 
 it('rechaza una contraseña menor de ocho caracteres', () => {
+  // Arrange
   renderRutas('/registro')
   completarRegistro({ password: '1234567', confirmar: '1234567' })
+
+  // Act
   fireEvent.submit(screen.getByRole('button', { name: 'Crear cuenta' }).closest('form'))
 
+  // Assert
   expect(screen.getByText('La contraseña debe tener 8 caracteres o más.')).toBeInTheDocument()
 })
